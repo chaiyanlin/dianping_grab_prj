@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 include_once('WebPageGrabber.class.php');
 include_once('./pinyin/Pinyin.class.php');
@@ -110,6 +110,7 @@ function get_id_file ( $city , $last_id = null) {
     $id_list = array();
     while ( !feof($file_handle) ) {
         $id = str_replace(PHP_EOL, '', fgets($file_handle));
+ 	$id = trim($id);
         if ( empty($id) )
             continue;
         if ( !empty($last_id) ) {
