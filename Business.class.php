@@ -99,6 +99,8 @@ class Business {
         while ( list ($key, $val) = each ( $obj ) ) {
             if ( $key == "regions" || $key == "categories" )
                 continue;
+            if ( $key == "business_id" )//business表格主键改为id
+                $key = 'id';
             $attributes = $attributes . "`$key`, ";
             $val = mysql_escape_string($val);
             $values = $values . "'$val', ";
@@ -142,7 +144,8 @@ class Business {
     public function addCategoriesQuery ( $list ) {
         $sql = array();
         foreach ( $list as $i ) {
-            array_push($sql, "INSERT INTO `guodong`.`categories` (`id`, `name`) VALUES (NULL, '$i');");
+            //所有运动商户的类型parent_id = 1；
+            array_push($sql, "INSERT INTO `guodong`.`categories` (`id`, `name`, `parent_id`) VALUES (NULL, '$i', '1');");
         }
         trace("Creating categories insert sql query:");
         trace($sql);
