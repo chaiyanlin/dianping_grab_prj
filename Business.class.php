@@ -103,7 +103,9 @@ class Business {
                 $key = 'id';
             $attributes = $attributes . "`$key`, ";
             $val = mysql_escape_string($val);
-            $values = $values . "'$val', ";
+            $values = $values . "'$val', ";           
+            if ( $key == "online_reservation_url" )//之后的数据不要
+                break;
         }
         
         $attributes = $attributes . "`created_by`) ";
